@@ -20,15 +20,22 @@ describe('Endpoints', () => {
     });
 
     describe('POST /register', () => {
-        it('should send back success with username', async () => {
-            const response = await request(app)
+        const testUserData = { username: 'bobbysmiles', password: 'youllneverguess' };
+        let response;
+        beforeAll(async () => {
+            response = await request(app)
                 .post('/register')
-                .send({
-                    username: 'bobbysmiles',
-                    password: 'youllneverguess'
-                });
+                .send(testUserData)
+                .catch(err => console.error(err));
+        });
+        it('should send back success with username', async () => {
             expect(response.status).toBe(200);
             expect(response.text).toBe('successfully created user bobbysmiles');
+        });
+        it('should create user with username', async () => {
+            const foundUser = await User.findOne({ where: { username: 'bobbysmiles' } });
+            expect(foundUser).toBeTruthy();
+            expect(foundUser.username).toBe('bobbysmiles');
         });
     });
 });
