@@ -37,5 +37,11 @@ describe('Endpoints', () => {
             expect(foundUser).toBeTruthy();
             expect(foundUser.username).toBe('bobbysmiles');
         });
+        it('should hash password', async () => {
+            const foundUser = await User.findOne({ where: { username: 'bobbysmiles' } });
+            expect(foundUser).toBeTruthy();
+            expect(foundUser.password).not.toBe(testUserData.password);
+            expect(foundUser.password).toEqual(expect.stringMatching(/^\$2[ayb]\$.{56}$/));
+        });
     });
 });
