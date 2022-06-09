@@ -7,7 +7,7 @@ app.use(express.urlencoded({extended:true}));
 
 app.get('/', async (req, res, next) => {
   try {
-    res.send('<h1>Hello World!</h1><p>Log in via POST /login or register via POST /register</p>');
+    res.send('<h1>Welcome to Loginopolis!</h1><p>Log in via POST /login or register via POST /register</p>');
   } catch (error) {
     console.error(error);
     next(error)

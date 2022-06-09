@@ -15,7 +15,7 @@ describe('Endpoints', () => {
         it('should return html', async () => {
             const response = await request(app).get('/');
             expect(response.status).toBe(200);
-            expect(response.text).toBe('<h1>Hello World!</h1><p>Log in via POST /login or register via POST /register</p>');
+            expect(response.text).toBe('<h1>Welcome to Loginopolis!</h1><p>Log in via POST /login or register via POST /register</p>');
         });
     });
 });
