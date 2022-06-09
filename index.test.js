@@ -28,8 +28,7 @@ describe('Endpoints', () => {
                     password: 'youllneverguess'
                 });
             expect(response.status).toBe(200);
-            expect(response.text).toBe(expect.stringContaining('success'));
-            expect(response.text).toBe(expect.stringContaining('bobbysmiles'));
+            expect(response.text).toBe('successfully created user bobbysmiles');
         });
     });
 });
