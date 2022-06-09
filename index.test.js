@@ -18,4 +18,18 @@ describe('Endpoints', () => {
             expect(response.text).toBe('<h1>Welcome to Loginopolis!</h1><p>Log in via POST /login or register via POST /register</p>');
         });
     });
+
+    describe('POST /register', () => {
+        it('should send back success with username', async () => {
+            const response = await request(app)
+                .post('/register')
+                .send({
+                    username: 'bobbysmiles',
+                    password: 'youllneverguess'
+                });
+            expect(response.status).toBe(200);
+            expect(response.text).toBe(expect.stringContaining('success'));
+            expect(response.text).toBe(expect.stringContaining('bobbysmiles'));
+        });
+    });
 });
