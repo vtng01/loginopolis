@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const { User } = require("./db");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
