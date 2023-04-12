@@ -1,6 +1,7 @@
 const { sequelize } = require("./db");
-const { User } = require("./");
+const { User, Post } = require("./");
 const users = require("./seedData");
+const posts = require("./seedDataPost.json");
 const bcrypt = require("bcryptjs");
 
 const seed = async () => {
@@ -12,7 +13,15 @@ const seed = async () => {
       return { username: user.username, password: hash };
     })
   );
+
   await User.bulkCreate(hashedUsers);
+  await Post.bulkCreate(posts);
+
+  let user = await User.findAll();
+  let post = await Post.findAll();
+
+  await user[0].addPosts([post[0], post[1]]);
+  await user[1].addPosts([post[2]]);
 };
 
 module.exports = seed;
